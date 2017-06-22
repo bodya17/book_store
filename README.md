@@ -2,7 +2,7 @@
 
 **Request:**
 
-[GET] /books
+[GET] /authors
 
 **Response:**
 
@@ -24,3 +24,24 @@
     },
     ...
 ]
+```
+
+## Getting all authors
+
+**Request:**
+
+[GET] /authors
+
+**Response:**
+
+```
+[
+    "Evan M.Hahn",
+    "Erich Gamma",
+    "Richard Helm",
+    "Ralph Johnson",
+    "John Vlissides",
+    "Jon Duckett"
+    ...
+]
+```
