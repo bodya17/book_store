@@ -2,7 +2,7 @@
 
 **Request:**
 
-[GET] /authors
+[GET] /books
 
 **Response:**
 

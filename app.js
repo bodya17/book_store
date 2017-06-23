@@ -1,6 +1,6 @@
 const express = require('express');
-const bookRoutes = require("./bookRoutes");
-const authorRoutes = require("./authorRoutes");
+const bookRoutes = require('./routes/bookRoutes');
+const authorRoutes = require('./routes/authorRoutes');
 const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost:27017/book_store');

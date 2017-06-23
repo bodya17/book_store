@@ -37,7 +37,7 @@ const createBooks = () => {
     books.forEach(bookData => {
         const book = new Book(bookData);
         book.save();
-    })
+    });
 };
 
 createBooks();
