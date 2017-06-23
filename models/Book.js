@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
+const Author = require('./Author');
 
 const bookSchema = mongoose.Schema({
-    authors: { type: Array, required: true },
+    authors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Author' }],
     name: { type: String, required: true },
     pages: { type: Number },
     ISBN: { type: String, required: true },
