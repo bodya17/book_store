@@ -86,14 +86,22 @@ const book3 = new Book({
     price: 10.24
 });
 
-Book.remove({}, function() {
+const book4 = new Book({
+    authors: jon._id,
+    name: 'HTML and CSS: Design and Build Websites',
+    ISBN: '978-1118008188',
+    year: 2013,
+    copies: 4,
+    pages: 295,
+    price: 16.26
 });
 
-Author.remove({}, function() {
-});
+Book.remove({}, function() {});
 
-const books = [book1, book2, book3];
+Author.remove({}, function() {});
 
-books.forEach(books => books.save());
+const books = [book1, book2, book3, book4];
+
+books.forEach(book => book.save());
 
 mongoose.disconnect();

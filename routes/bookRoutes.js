@@ -28,13 +28,15 @@ router.post('/', function(req, res, next) {
 
 router.get('/allbooks', function(req, res) {
     Book
-        .find({})
-        .populate('authors')
+        .aggregate({ $unwind: '$authors'} )
         .exec((err, books) => {
             if (err) {
                 res.send(err);
             } else {
-                res.send(books);
+                Book.populate(books, { path: 'authors' }, (err, populatedBooks) => {
+                    res.send(populatedBooks.filter(b => b.authors.firstName === 'Jon'));
+                    
+                });
             }
         });
 });
