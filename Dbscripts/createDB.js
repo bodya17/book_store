@@ -7,49 +7,49 @@ mongoose.connect('mongodb://localhost:27017/book_store');
 const david =  new Author({
     firstName: 'David',
     lastName: 'Flanagan',
-    dob: new Date(1965),
+    dob: new Date(1965, 0),
     bio: 'David Flanagan is a computer programmer who has spent much of the last 20 years writing books about programming languages. He now works at Mozilla. David lives with his wife and children in the Pacific Northwest, between the cities of Seattle and Vancouver.'
 });
 
 const evan = new Author({
     firstName: 'Evan',
     lastName: 'M.Hahn',
-    dob: new Date(1970),
+    dob: new Date(1970, 0),
     bio: 'Evan M.Hahn is author of Express in Action book'
 });
 
 const jon = new Author({
     firstName: 'Jon',
     lastName: 'Duckett',
-    dob: new Date(1955),
+    dob: new Date(1955, 0),
     bio: 'Jon Duckett is author of JavaScript and JQuery: Interactive Front-End Web Development book'
 });
 
 const erich = new Author({
     firstName: 'Erich',
     lastName: 'Gamma',
-    dob: new Date(1961),
+    dob: new Date(1961, 0),
     bio: 'Erich Gamma is a Swiss computer scientist and co-author of the influential software engineering textbook, Design Patterns: Elements of Reusable Object-Oriented Software. '
 });
 
 const richard = new Author({
     firstName: 'Richard',
     lastName: 'Helm',
-    dob: new Date(1962),
+    dob: new Date(1962, 0),
     bio: 'Richard Helm is computer scientist and co-author of the influential software engineering textbook, Design Patterns: Elements of Reusable Object-Oriented Software.'
 });
 
 const ralph = new Author({
     firstName: 'Ralph',
     lastName: 'Johnson',
-    dob: new Date(1964),
+    dob: new Date(1964, 0),
     bio: 'Ralph Johnson is computer scientist and co-author of the influential software engineering textbook, Design Patterns: Elements of Reusable Object-Oriented Software. '
 });
 
 const john = new Author({
     firstName: 'John',
     lastName: 'Vlissides',
-    dob: new Date(1962),
+    dob: new Date(1962, 0),
     bio: 'John Vlissides is computer scientist and co-author of the influential software engineering textbook, Design Patterns: Elements of Reusable Object-Oriented Software. '
 });
 
