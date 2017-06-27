@@ -8,7 +8,7 @@ const bookSchema = mongoose.Schema({
     ISBN: { type: String, required: true },
     year: { type: Number, required: true },
     copies: { type: Number, default: 1 },
-    price: { type: Number, required: true },
+    price: { type: Number, default: 20 },
     currency: { type: String, default: 'United States dollar' },
 });
 

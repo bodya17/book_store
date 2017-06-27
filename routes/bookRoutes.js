@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Book = require('../models/Book');
+const Author = require('../models/Author');
 
 router.get('', function(req, res, next) {
     res.render('new-book');
@@ -27,13 +28,19 @@ router.post('/', function(req, res, next) {
 });
 
 router.get('/allbooks', function(req, res) {
+
     Book
         .find({})
-        .exec((err, books) => {
+        .populate({
+            path: 'authors',
+            select: 'firstName lastName -_id'
+        })
+        .exec((err, result) => {
             if (err) {
-                res.send(err);
+                console.log('Error');
+                console.log(err);
             } else {
-                res.send(books);
+                res.send(result);
             }
         });
 });

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Book = require('../models/Book');
 const Author = require('../models/Author');
+const async = require('async');
 
 mongoose.connect('mongodb://localhost:27017/book_store');
 
@@ -114,16 +115,59 @@ const books = [book1, book2, book3, book4, book5];
 
 books.forEach(book => book.save());
 
-Author.update(
-    { _id :  evan._id },
-    { books: [book1._id] }
-);
-
-Author.update(
-    { _id : david._id },
-    { books: [book5._id] }
-);
-
-mongoose.disconnect();
-
+setTimeout(function() {
+    async.parallel([
+        function(cb) {
+            Author.update(
+                { _id : david._id },
+                { books: [book5._id] },
+                cb
+            );
+        },
+        function(cb) {
+            Author.update(
+                { _id :  evan._id },
+                { books: [book1._id] },
+                cb
+            );
+        },
+        function(cb) {
+            Author.update(
+                { _id :  jon._id },
+                { books: [book2._id, book4._id] },
+                cb
+            );
+        },
+        function(cb) {
+            Author.update(
+                { _id :  richard._id },
+                { books: [book3._id] },
+                cb
+            );
+        },
+        function(cb) {
+            Author.update(
+                { _id :  erich._id },
+                { books: [book3._id] },
+                cb
+            );
+        },
+        function(cb) {
+            Author.update(
+                { _id :  ralph._id },
+                { books: [book3._id] },
+                cb
+            );
+        },
+        function(cb) {
+            Author.update(
+                { _id :  john._id },
+                { books: [book3._id] },
+                cb
+            );
+        }
+    ], function() {
+        mongoose.disconnect();
+    });
+}, 0);
 

@@ -4,22 +4,29 @@ const Book = require('../models/Book');
 const Author = require('../models/Author');
 
 router.get('/', function(req, res) {
-    Author.aggregate({ $project: {_id: 0, __v: 0} }, (err, authors) => {
-        res.send(authors);
-    });
+    Author
+        .find({}, (err, result) => {
+            Author.populate(result, { path: 'books' }, (err, result) => {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.send(result);
+                }
+            });
+        });
 });
 
 router.get('/:name', function(req, res) {
     const name = req.params.name;
-    Book
-        .aggregate({ $unwind: '$authors' } )
-        .exec((err, books) => {
+    Author
+        .find({ firstName: name }, (err, result) => {
             if (err) {
                 res.send(err);
             } else {
-                Book.populate(books, { path: 'authors' }, (err, populatedBooks) => {
-                    res.send(populatedBooks.filter(b => b.authors.firstName === name));
+                Author.populate(result, { path: 'books' }, (err, result) => {
+                    res.send(result);
                 });
+                // res.send(result);
             }
         });
 });
