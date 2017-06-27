@@ -4,6 +4,8 @@ const Author = require('../models/Author');
 
 mongoose.connect('mongodb://localhost:27017/book_store');
 
+Author.remove({}, function() {});
+
 const david =  new Author({
     firstName: 'David',
     lastName: 'Flanagan',
@@ -96,12 +98,32 @@ const book4 = new Book({
     price: 16.26
 });
 
+const book5 = new Book({
+    authors: david._id,
+    name: 'JavaScript: The Definitive Guide',
+    ISBN: '978-1118008132',
+    year: 2011,
+    copies: 3,
+    pages: 850,
+    price: 70.24
+});
+
 Book.remove({}, function() {});
 
-Author.remove({}, function() {});
-
-const books = [book1, book2, book3, book4];
+const books = [book1, book2, book3, book4, book5];
 
 books.forEach(book => book.save());
 
+Author.update(
+    { _id :  evan._id },
+    { books: [book1._id] }
+);
+
+Author.update(
+    { _id : david._id },
+    { books: [book5._id] }
+);
+
 mongoose.disconnect();
+
+

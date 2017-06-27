@@ -28,18 +28,14 @@ router.post('/', function(req, res, next) {
 
 router.get('/allbooks', function(req, res) {
     Book
-        .aggregate({ $unwind: '$authors'} )
+        .find({})
         .exec((err, books) => {
             if (err) {
                 res.send(err);
             } else {
-                Book.populate(books, { path: 'authors' }, (err, populatedBooks) => {
-                    res.send(populatedBooks.filter(b => b.authors.firstName === 'Jon'));
-                    
-                });
+                res.send(books);
             }
         });
 });
-
 
 module.exports = router;

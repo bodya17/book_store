@@ -12,7 +12,7 @@ router.get('/', function(req, res) {
 router.get('/:name', function(req, res) {
     const name = req.params.name;
     Book
-        .aggregate({ $unwind: '$authors'} )
+        .aggregate({ $unwind: '$authors' } )
         .exec((err, books) => {
             if (err) {
                 res.send(err);
