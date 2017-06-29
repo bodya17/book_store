@@ -27,20 +27,43 @@ router.post('/', function(req, res, next) {
         }
 });
 
-router.get('/allbooks', function(req, res) {
-
+router.get('/average', function(req, res) {
+    const start = Date.now();
     Book
-        .find({})
-        .populate({
-            path: 'authors',
-            select: 'firstName lastName -_id'
+        .aggregate({ $group: { _id: null, average: {$avg: '$pages'}} })
+        .exec((err, result) => {
+            if (err) {
+                console.log('Error');
+                res.send(err);
+            }
+            else {
+                console.log(result);
+                const end = Date.now();
+                res.send(Object.assign({}, result[0], {time: (end - start) / 1000 + 'sec'}));
+            }
         })
+});
+
+router.get('/allbooks', function(req, res) {
+    const start = Date.now();
+    Book
+        // .find({$where: 'this.authors.length >= 1'})
+        .find({'authors.1': {$exists: true}}, {name: 1, _id: 0, authors: 1})
+        // .populate({
+        //     path: 'authors',
+        //     select: 'firstName lastName -_id'
+        // })
         .exec((err, result) => {
             if (err) {
                 console.log('Error');
                 console.log(err);
             } else {
-                res.send(result);
+                Book
+                    .populate(result, { path: 'authors', select: 'firstName lastName -_id' }, (err, result1) => {
+                        const end = Date.now();
+                        console.log((end - start) / 1000, 'sec');
+                        res.send(result1);
+                    })
             }
         });
 });
