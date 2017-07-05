@@ -1,3 +1,0 @@
-db.getCollection('books').aggregate({$group: {_id : null, average_book_length : {$avg: '$pages'}}})
-
-db.books.find({'authors.1': {$exists: true}})

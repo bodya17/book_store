@@ -11,7 +11,7 @@ mongoose.connect('mongodb://localhost:27017/book_store');
 
 const app = express();
 
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 3001);
 app.set('views', path.resolve(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
