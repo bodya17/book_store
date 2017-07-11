@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const Author = require('./Author');
+const mongoose = require('mongoose'),
+    Author = require('./Author');
 
 const bookSchema = mongoose.Schema({
     authors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Author' }],

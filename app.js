@@ -1,11 +1,11 @@
 require('dotenv').config();
 
-const express = require('express');
-const path = require('path');
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const logger = require('morgan');
-const routes = require('./routes');  // import only one main (index) router and use it
+const express = require('express'),
+    path = require('path'),
+    bodyParser = require('body-parser'),
+    mongoose = require('mongoose'),
+    logger = require('morgan'),
+    routes = require('./routes');
 
 mongoose.connect(process.env.DB_URI);
 

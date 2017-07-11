@@ -1,12 +1,10 @@
-const Author = require('../models/Author');
-// const authorsData = require('../AUTHORS');
-const mongoose = require('mongoose');
+const Author = require('../models/Author'),
+    mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost:27017/book_store');
 
-const authorsData = [];
 
-function randomDate(start, end) {
+function randomDate (start, end) {
     return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 }
 
@@ -21,4 +19,3 @@ for (let i = 0; i < 50000; i++) {
 }
 
 mongoose.disconnect();
-// console.log(authorsData.length);

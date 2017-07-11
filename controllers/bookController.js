@@ -1,5 +1,5 @@
-const Book = require('../models/Book');
-const Author = require('../models/Author');
+const Book = require('../models/Book'),
+    Author = require('../models/Author');
 
 exports.list = (req, res) => {
    Book.find({}, 'name authors -_id').exec()

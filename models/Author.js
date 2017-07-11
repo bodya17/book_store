@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const Book = require('./Book');
+const mongoose = require('mongoose'),
+    Book = require('./Book');
 
 const authorSchema = mongoose.Schema({
     firstName: { type: String, required: true },
@@ -11,7 +11,7 @@ const authorSchema = mongoose.Schema({
 
 authorSchema
     .virtual('fullName')
-    .get(function() {
+    .get(function () {
         return this.firstName + ' ' + this.lastName;
     });
 

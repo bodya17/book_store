@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@eleks/eslint-config-eleks": "^0.2.1",
     "async": "^2.5.0",
     "body-parser": "^1.17.2",
     "dotenv": "^4.0.0",

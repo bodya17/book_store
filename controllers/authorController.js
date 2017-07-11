@@ -5,7 +5,7 @@ exports.getAuthors = (req, res, next) => {
         .then(result => Author.populate(result, { path: 'books' }))
         .then(populated => res.send(populated))
         .catch(err => console.error(err));
-}
+};
 
 exports.getAuthorByName = (req, res, next) => {
     const name = req.params.name;
@@ -13,4 +13,4 @@ exports.getAuthorByName = (req, res, next) => {
         .then(result => Author.populate(result, { path: 'books' }))
         .then(populated => res.send(populated))
         .catch(err => console.error(err));
-}
+};
