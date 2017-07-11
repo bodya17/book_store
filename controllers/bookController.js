@@ -1,18 +1,14 @@
 const Book = require('../models/Book');
+const Author = require('../models/Author');
 
-exports.listBooks = (req, res, next) => { // next - is never  used (row 7 dont count)
-   Book
-        .find({}, 'name authors -_id') //  
-        .exec((err, result) => {
-            if (err) { return next(err); } // next(err) ? WTF? 
-            Book
-                .populate(result, { path: 'authors', select: 'firstName lastName -_id' }, (err, result) => { // is it posible to combine this and 5 row?
-                    res.send(result);
-                });
-        });
+exports.list = (req, res) => {
+   Book.find({}, 'name authors -_id').exec()
+    .then(result => Book.populate(result, { path: 'authors', select: 'firstName lastName -_id' }))
+    .then(authors => res.send(authors))
+    .catch(err => console.log(err));
 };
 
-exports.createBook = (req, res, next) => { // next - is never  used
+exports.create = (req, res) => {
     if (!req.body.name
         || !req.body.authors
         || !req.body.ISBN
@@ -29,3 +25,8 @@ exports.createBook = (req, res, next) => { // next - is never  used
             res.redirect('/book/allbooks');
         }
 }
+
+exports.form = async (req, res) => {
+    const authors = await Author.find({});
+    res.render('new-book', { authors });
+};

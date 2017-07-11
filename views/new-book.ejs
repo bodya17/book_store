@@ -9,10 +9,11 @@
 
     <div class="form-group">
         <label for="authors">Authors</label>
-        <% for(let i = 0; i < authors.length; i++) { %>
-        <% authors[i] %>
-        <% } %>
-        <input type="text" class="form-control" id="authors" name="authors" placeholder="Authors" required>
+        <select multiple>
+            <% for(let i = 0; i < authors.length; i++) { %>
+            <option><%= authors[i].fullName %></option>
+            <% } %>
+        </select>
     </div>
 
     <div class="form-group">
