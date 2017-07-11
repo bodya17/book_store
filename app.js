@@ -5,9 +5,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const logger = require('morgan');
-// no blank line here
-const bookRoutes = require('./routes/bookRoutes');  // import only one main (index) router and use it
-const authorRoutes = require('./routes/authorRoutes');
+const routes = require('./routes');  // import only one main (index) router and use it
 
 mongoose.connect(process.env.DB_URI);
 
@@ -20,8 +18,8 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use('/book', bookRoutes);
-app.use('/authors', authorRoutes);
+app.use('/book', routes.bookRoutes);
+app.use('/authors', routes.authorRoutes);
 
 app.listen(app.get('port'), () => {
     console.log('Server started on port ' + app.get('port'));
