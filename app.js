@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -7,7 +9,7 @@ const logger = require('morgan');
 const bookRoutes = require('./routes/bookRoutes');  // import only one main (index) router and use it
 const authorRoutes = require('./routes/authorRoutes');
 
-mongoose.connect('mongodb://localhost:27017/book_store'); // move this to config file (create it)
+mongoose.connect(process.env.DB_URI);
 
 const app = express();
 

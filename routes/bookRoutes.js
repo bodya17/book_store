@@ -4,7 +4,7 @@ const router = express.Router();
 const bookController = require('../controllers/bookController'); 
 
 router.get('', function(req, res, next) { // next - unused
-    res.render('new-book');
+    res.render('new-book', {authors: ['a', 'b']});
 });
 
 router.post('/', bookController.createBook); // diff signature lines 6 and 10  , "create" is enough
