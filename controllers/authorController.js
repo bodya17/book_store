@@ -1,16 +1,14 @@
-const Author = require('../models/Author');
+const authorService = require('../services/authorService');
 
 exports.getAuthors = (req, res) => {
-    Author.find({}).exec()
-        .then(result => Author.populate(result, { path: 'books' }))
-        .then(populated => res.send(populated))
+    authorService.getAuthors()
+        .then(authors => res.send(authors))
         .catch(err => console.error(err));
 };
 
 exports.getAuthorByName = (req, res) => {
-    const name = req.params.name;
-    Author.find({ firstName: name }).exec()
-        .then(result => Author.populate(result, { path: 'books' }))
-        .then(populated => res.send(populated))
+    const { name } = req.params;
+    authorService.getAuthorByName(name)
+        .then(authors => res.send(authors))
         .catch(err => console.error(err));
 };

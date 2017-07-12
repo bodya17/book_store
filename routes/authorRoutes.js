@@ -1,4 +1,3 @@
-
 const authorController = require('../controllers/authorController');
 
 const authorRouter = router => {
