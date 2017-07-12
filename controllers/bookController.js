@@ -9,6 +9,7 @@ exports.list = (req, res) => {
 };
 
 exports.create = (req, res) => {
+    console.log(req.body);
     if (!req.body.name
         || !req.body.authors
         || !req.body.ISBN

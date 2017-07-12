@@ -8,6 +8,7 @@ const express = require('express'),
     routes = require('./routes');
 
 mongoose.connect(process.env.DB_URI);
+mongoose.Promise = global.Promise;
 
 const app = express();
 
@@ -18,8 +19,7 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use('/book', routes.bookRoutes);
-app.use('/authors', routes.authorRoutes);
+app.use('/', routes);
 
 app.listen(app.get('port'), () => {
     console.log('Server started on port ' + app.get('port'));
