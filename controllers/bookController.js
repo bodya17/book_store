@@ -8,6 +8,13 @@ exports.list = (req, res) => {
     .catch(err => console.log(err));
 };
 
+exports.getBookByID = (req, res) => {
+    const { id } = req.params
+    Book.find({ _id: id }).exec()
+        .then(books => res.send(books))
+        .catch(err => console.log(err));
+};
+
 exports.create = (req, res) => {
     console.log(req.body);
     if (!req.body.name

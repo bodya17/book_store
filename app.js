@@ -19,6 +19,11 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use((req, res, next) => {
+    Object.setPrototypeOf(req.body, {});
+    next();
+});
+
 app.use('/', routes);
 
 app.listen(app.get('port'), () => {
