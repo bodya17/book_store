@@ -3,7 +3,7 @@ const bookController = require('../controllers/bookController'),
 
 const createBookSchema = {
     name: expressJoi.Joi.types.string(),
-    authors: expressJoi.Joi.types.string(),
+    authors: expressJoi.Joi.types.array(),
     ISBN: expressJoi.Joi.types.string(),
     year: expressJoi.Joi.types.number().min(1900).max(2017),
     price: expressJoi.Joi.types.number().min(0),
