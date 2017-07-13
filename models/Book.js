@@ -1,5 +1,6 @@
 const mongoose = require('mongoose'),
-    Author = require('./Author');
+    Author = require('./Author'),
+    Store = require('./Store');
 
 const bookSchema = mongoose.Schema({
     authors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Author' }],
@@ -10,6 +11,7 @@ const bookSchema = mongoose.Schema({
     copies: { type: Number, default: 1 },
     price: { type: Number, default: 20 },
     currency: { type: String, default: 'United States dollar' },
+    stores: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Store' }]
 });
 
 const Book = mongoose.model('Book', bookSchema);

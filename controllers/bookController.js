@@ -9,7 +9,7 @@ exports.list = (req, res) => {
 };
 
 exports.getBookByID = (req, res) => {
-    const { id } = req.params
+    const { id } = req.params;
     bookService.getBookByID(id)
         .then(books => res.send(books))
         .catch(err => console.log(err));
