@@ -18,6 +18,7 @@ const bookRouter = router => {
         .post(expressJoi.joiValidate(createBookSchema), bookController.create);
     router.get('/books/allbooks', bookController.list);
     router.get('/books/:id', bookController.getBookByID);
+    router.get('/books/bar/:field', bookController.chart);
 };
 
 module.exports = bookRouter;

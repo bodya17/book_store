@@ -1,7 +1,7 @@
 const Author = require('../models/Author'),
     mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/book_store');
+mongoose.connect(process.env.DB_URI);
 
 
 function randomDate (start, end) {

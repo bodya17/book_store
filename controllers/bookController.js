@@ -1,5 +1,6 @@
 const bookService = require('../services/bookService'),
-    Author = require('../models/Author');
+    Author = require('../models/Author'),
+    Book = require('../models/Book');
 
 exports.list = (req, res) => {
     bookService.getAllBooks()
@@ -23,4 +24,13 @@ exports.create = async (req, res) => {
 exports.form = async (req, res) => {
     const authors = await Author.find({});
     res.render('new-book', { authors });
+};
+
+exports.chart = async (req, res) => {
+    const { field } = req.params;
+    const books = await Book.find({}, `name ${field} -_id`);
+    res.render('barChartBookPages', {
+        cats: books.map(b => b.name),
+        data: books.map(b => b[field])
+    });
 };
