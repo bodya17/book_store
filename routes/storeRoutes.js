@@ -4,7 +4,7 @@ const storeController = require('../controllers/storeController'),
 const storeRouter = router => {
     router.route('/store')
         .get(storeController.getStores)
-        .post(storeController.createStore);
+        .post(storeController.createStoreSerial);
 };
 
 module.exports = storeRouter;

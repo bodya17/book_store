@@ -8,10 +8,10 @@ exports.getStores = async (req, res) => {
 };
 
 const updateBook = (bookID, storeID) => {
-    return Book.findByIdAndUpdate(
+    return () => Book.findByIdAndUpdate(
         bookID,
         { $push: { stores: storeID }},
-        { new: true });
+        { new: true }).exec();
 };
 
 const updateBookCallback = (bookID, storeID, cb) => {
@@ -21,7 +21,7 @@ const updateBookCallback = (bookID, storeID, cb) => {
         { new: true }).exec(cb);
 };
 
-exports.createStore = async (req, res) => {
+exports.createStoreParallel = async (req, res) => {
     const store = new Store(req.body);
     const newStore = await store.save();
     // parallel save (Promises)
@@ -37,4 +37,29 @@ exports.createStore = async (req, res) => {
             else { console.log('Result: ', result); res.send(result); }
         }
     )
+};
+
+// https://hackernoon.com/functional-javascript-resolving-promises-sequentially-7aac18c4431e
+const promiseSerial = funcs =>
+  funcs.reduce((promise, func) =>
+    promise.then(result => func().then(_ => [...result, _])),
+    Promise.resolve([]));
+
+exports.createStoreSerial = async (req, res) => {
+    const store = new Store(req.body);
+    const newStore = await store.save();
+    // parallel save (Promises)
+
+    // promiseSerial(
+    //     newStore.books.map(bookID => updateBook(bookID, newStore._id))
+    // ).then(result => res.send(result))
+    
+    // serial save (async.js)
+    async.series(
+        newStore.books.map(bookID => updateBookCallback.bind(null, bookID, newStore._id)),
+        (err, result) => {
+            if (err) { console.log('Error: ', err) }
+            else { console.log('Result: ', result); res.send(result.map(b => b.name)); }
+        }
+    );
 };
